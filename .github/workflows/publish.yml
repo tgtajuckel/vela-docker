@@ -4,7 +4,7 @@ name: publish
 # trigger on push events with branch master
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 # pipeline to execute
 jobs:
@@ -29,7 +29,8 @@ jobs:
     - name: publish
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
-        name: target/vela-docker
+        name: ${{ github.actor }}/vela-docker
         cache: true
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: ghcr.io

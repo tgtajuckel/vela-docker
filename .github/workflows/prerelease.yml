@@ -35,8 +35,9 @@ jobs:
     - name: publish
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
-        name: target/vela-docker
+        name: ${{ github.actor }}/vela-docker
         cache: true
         tag_names: true
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        username: ${{ github.actor }}
+        password: ${{ github.GITHUB_TOKEN }}
+        registry: ghcr.io
